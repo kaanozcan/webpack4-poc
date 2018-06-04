@@ -39,6 +39,13 @@ const defaultConfig = {
     },
     extensions: [".js", ".jsx"]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        browser: true
+      }
+    }),
+  ],
   module: {
     rules: [
       {
