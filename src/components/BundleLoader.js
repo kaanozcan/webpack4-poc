@@ -11,20 +11,20 @@ class BundleLoader extends Component {
 
   load (props) {
     if (process.env.browser) {
+      //On browser load module async
       props.resolve()
         .then((mod) => this.setState({
-          mod: mod.default ? mod.default : mod
+          mod: mod.default
         }));
     }
   }
 
   render () {
     if (process.env.browser) {
-      //On browser load module async
       return this.state.mod ? this.props.children(this.state.mod) : null;
     } else {
       //On server load module sync
-      return this.props.children(this.props.require());
+      return this.props.children(this.props.resolveSync());
     }
   }
 }
